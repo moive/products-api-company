@@ -1,7 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 
-import pkg from '../package.json';
+import { pkg } from './helpers/pkg';
 import productsRoutes from './routes/products.routes';
 
 const app = express();
