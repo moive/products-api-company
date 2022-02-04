@@ -1,7 +1,8 @@
 import Product from '../models/Product';
 import { httpError } from '../helpers/handleError';
+import { Request, Response } from 'express';
 
-export const createProduct = async (req, res) => {
+export const createProduct = async (req: Request, res: Response) => {
 	try {
 		const { name, category, price, imgURL } = req.body;
 		const newProd = new Product({ name, category, price, imgURL });
@@ -12,7 +13,7 @@ export const createProduct = async (req, res) => {
 	}
 };
 
-export const getProducts = async (req, res) => {
+export const getProducts = async (req: Request, res: Response) => {
 	try {
 		const products = await Product.find();
 		res.json(products);
@@ -21,7 +22,7 @@ export const getProducts = async (req, res) => {
 	}
 };
 
-export const getProductById = async (req, res) => {
+export const getProductById = async (req: Request, res: Response) => {
 	try {
 		const product = await Product.findById(req.params.Id);
 		res.status(200).json(product);
@@ -30,7 +31,7 @@ export const getProductById = async (req, res) => {
 	}
 };
 
-export const updatedProductById = async (req, res) => {
+export const updatedProductById = async (req: Request, res: Response) => {
 	try {
 		const updateProduct = await Product.findByIdAndUpdate(req.params.Id, req.body, {
 			new: true
@@ -41,7 +42,7 @@ export const updatedProductById = async (req, res) => {
 	}
 };
 
-export const deleteProductById = async (req, res) => {
+export const deleteProductById = async (req: Request, res: Response) => {
 	try {
 		const producDeleted = await Product.findByIdAndDelete(req.params.Id);
 		res.status(200).json(producDeleted);

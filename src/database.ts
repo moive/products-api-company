@@ -5,9 +5,6 @@ const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.
 
 // prettier-ignore
 mongoose
-    .connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
+    .connect(uri)
     .then((db) => console.log('Db is connect'))
     .catch((error) => console.log(error));
