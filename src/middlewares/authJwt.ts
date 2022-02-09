@@ -2,12 +2,16 @@ import jwt from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import User from "../models/User";
 
-interface UserId {
+interface IUserId {
 	id: string;
 }
 
+interface IGetUserAuthInfoRequest extends Request {
+	userId?: string;
+}
+
 export const verifyToken = async (
-	req: Request,
+	req: IGetUserAuthInfoRequest,
 	res: Response,
 	next: NextFunction
 ) => {
@@ -19,7 +23,9 @@ export const verifyToken = async (
 
 		const decoded = jwt.verify(token as string, `${process.env.SECRET}`);
 
-		const user = await User.findById((decoded as UserId).id, {
+		// req.userId = (decoded as IUserId).id;
+
+		const user = await User.findById((decoded as IUserId).id, {
 			password: 0,
 		});
 		console.log(user);
