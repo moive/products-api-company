@@ -1,1 +1,1 @@
-export { verifyToken } from "./authJwt";
+export { verifyToken, isModerator, isAdmin } from "./authJwt";

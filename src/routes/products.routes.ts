@@ -15,10 +15,10 @@ router.post("/", [verifyToken, isModerator], createProduct);
 
 router.get("/", getProducts);
 
-router.get("/:Id", verifyToken, getProductById);
+router.get("/:Id", getProductById);
 
 router.put("/:Id", verifyToken, updatedProductById);
 
-router.delete("/:Id", verifyToken, deleteProductById);
+router.delete("/:Id", [verifyToken, isModerator], deleteProductById);
 
 export default router;
