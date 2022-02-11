@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { ROLES } from "../models/Role";
+import Role, { ROLES } from "../models/Role";
 import User from "../models/User";
+
+interface IRole {
+	name: string;
+}
 
 export const checkDuplicateUsernameOrEmail = async (
 	req: Request,
@@ -20,14 +24,21 @@ export const checkDuplicateUsernameOrEmail = async (
 	next();
 };
 
-export const checkRolesExisted = (
+export const checkRolesExisted = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
+	const rolesDB: () => Promise<IRole[]> = async () => {
+		const roles: IRole[] = await (
+			await Role.find()
+		).map((role) => role.name);
+		return roles;
+	};
+
 	if (req.body.roles) {
 		for (let i = 0; i < req.body.roles.length; i++) {
-			if (!ROLES.includes(req.body.roles[i])) {
+			if (!(await rolesDB()).includes(req.body.roles[i])) {
 				return res.status(400).json({
 					message: `Role ${req.body.roles[i]} does not exits`,
 				});
