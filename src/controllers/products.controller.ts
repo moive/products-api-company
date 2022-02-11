@@ -49,6 +49,9 @@ export const updatedProductById = async (req: Request, res: Response) => {
 export const deleteProductById = async (req: Request, res: Response) => {
 	try {
 		const producDeleted = await Product.findByIdAndDelete(req.params.Id);
+		if (producDeleted == null) {
+			return res.status(404).json({ message: "No product found" });
+		}
 		res.status(200).json(producDeleted);
 	} catch (err) {
 		httpError(res, err, "Server Error");

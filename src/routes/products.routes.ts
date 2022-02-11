@@ -17,8 +17,8 @@ router.get("/", getProducts);
 
 router.get("/:Id", getProductById);
 
-router.put("/:Id", verifyToken, updatedProductById);
+router.put("/:Id", [verifyToken, isAdmin], updatedProductById);
 
-router.delete("/:Id", [verifyToken, isModerator], deleteProductById);
+router.delete("/:Id", [verifyToken, isAdmin], deleteProductById);
 
 export default router;

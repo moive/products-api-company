@@ -10,3 +10,7 @@ export const getUsers = async (req: Request, res: Response) => {
 		httpError(res, err, "Not found");
 	}
 };
+
+export const createUser = async (req: Request, res: Response) => {
+	res.json("creating user");
+};
