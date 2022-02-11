@@ -29,3 +29,4 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 
 export default app;
+//express validator and joi for validations
