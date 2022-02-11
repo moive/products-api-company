@@ -7,11 +7,11 @@ import {
 	deleteProductById,
 } from "../controllers/products.controller";
 
-import { verifyToken } from "../middlewares/";
+import { verifyToken, isModerator, isAdmin } from "../middlewares/";
 
 const router = Router();
 
-router.post("/", verifyToken, createProduct);
+router.post("/", [verifyToken, isModerator], createProduct);
 
 router.get("/", getProducts);
 
